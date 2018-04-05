@@ -50,9 +50,6 @@ public class MainActivity extends AppCompatActivity implements TaskCompleted{
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        contactsAdapter = new ContactsAdapter(contactList2);
-        Log.d(TAG, "CheckSize: "+contactList2.size());
-        recyclerView.setAdapter(contactsAdapter);
 //        Log.d(TAG, "onCreate: FUCK YOU!!!!!!!!!!!!!!!");
     }
 
@@ -99,7 +96,13 @@ public class MainActivity extends AppCompatActivity implements TaskCompleted{
             lv.setAdapter(adapter);*/
 //            Log.d(TAG, "onPostExecute: "+contactList2.get(0));
             mCallback.onTaskComplete(list);
-        new MainActivity().setList(list);}
+
+        new MainActivity().setList(list);
+            contactsAdapter = new ContactsAdapter(contactList2);
+            Log.d(TAG, "CheckSize: "+contactList2.size());
+            recyclerView.setAdapter(contactsAdapter);
+
+        }
 
         @Override
         protected List doInBackground(Void... voids) {
