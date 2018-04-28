@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidhiveApi.iml" filepath="$PROJECT_DIR$/AndroidhiveApi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SimpleApi.iml" filepath="$PROJECT_DIR$/SimpleApi.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

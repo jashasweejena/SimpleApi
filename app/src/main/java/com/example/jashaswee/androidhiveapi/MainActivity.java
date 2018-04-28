@@ -3,17 +3,15 @@ package com.example.jashaswee.androidhiveapi;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
-import android.widget.Toolbar;
+
+import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements TaskCompleted{
     private List<Contacts> contactList2;
     public ContactsAdapter contactsAdapter;
     private RecyclerView recyclerView;
+    FastItemAdapter<Contacts> fastItemAdapter;
 
     public void setList(List list)
     {
@@ -49,8 +48,7 @@ public class MainActivity extends AppCompatActivity implements TaskCompleted{
         new GetContacts(this).execute();
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-//        Log.d(TAG, "onCreate: FUCK YOU!!!!!!!!!!!!!!!");
+        fastItemAdapter = new FastItemAdapter<>();
     }
 
 
@@ -100,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements TaskCompleted{
         new MainActivity().setList(list);
             contactsAdapter = new ContactsAdapter(contactList2);
             Log.d(TAG, "CheckSize: "+contactList2.size());
-            recyclerView.setAdapter(contactsAdapter);
+            recyclerView.setAdapter(fastItemAdapter);
 
         }
 
