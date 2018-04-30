@@ -1,10 +1,10 @@
 package com.example.jashaswee.androidhiveapi;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.items.AbstractItem;
 
 import java.util.List;
@@ -23,6 +23,8 @@ public class Contacts extends AbstractItem<Contacts, Contacts.ViewHolder> {
         this.email = email;
         this.mobile = mobile;
     }
+
+    public Contacts(){ }
 
     public String getName() {
         return name;
@@ -48,13 +50,6 @@ public class Contacts extends AbstractItem<Contacts, Contacts.ViewHolder> {
         this.mobile = mobile;
     }
 
-    @Override
-    public void bindView(ViewHolder holder, List<Object> payloads) {
-        super.bindView(holder, payloads);
-        holder.name.setText(getName());
-        holder.email.setText(getEmail());
-        holder.mobile.setText(getMobile());
-    }
 
     @NonNull
     @Override
@@ -69,11 +64,11 @@ public class Contacts extends AbstractItem<Contacts, Contacts.ViewHolder> {
 
     @Override
     public int getLayoutRes() {
-        return 0;
+        return R.layout.list_item;
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends FastAdapter.ViewHolder<Contacts> {
         public TextView name;
         public TextView email;
         public TextView mobile;
@@ -85,6 +80,21 @@ public class Contacts extends AbstractItem<Contacts, Contacts.ViewHolder> {
             email = itemView.findViewById(R.id.email);
             mobile = itemView.findViewById(R.id.mobile);
         }
+
+        @Override
+        public void bindView(Contacts item, List<Object> payloads) {
+            name.setText(getName());
+            email.setText(getEmail());
+            mobile.setText(getMobile());
+        }
+
+        @Override
+        public void unbindView(Contacts item) {
+            name.setText(null);
+            email.setText(null);
+            mobile.setText(null);
+        }
+
 
     }
 
