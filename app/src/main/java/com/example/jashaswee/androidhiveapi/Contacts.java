@@ -7,13 +7,14 @@ import android.widget.TextView;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.items.AbstractItem;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by jashaswee on 31/3/18.
  */
 
-public class Contacts extends AbstractItem<Contacts, Contacts.ViewHolder> {
+public class Contacts extends AbstractItem<Contacts, Contacts.ViewHolder> implements Serializable {
     private String name;
     private String email;
     private String mobile;

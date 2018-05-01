@@ -20,7 +20,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements TaskCompleted {
     private static String TAG = MainActivity.class.getSimpleName();
@@ -30,14 +29,15 @@ public class MainActivity extends AppCompatActivity implements TaskCompleted {
     //URL TO GET JSON
     //    FastItemAdapter<Contacts> fastItemAdapter;
     Contacts contacts;
-    private ProgressDialog pDialog;
-    private ListView lv;
-    private List<Contacts> contactList = new ArrayList<>();
-    private List<Contacts> contactList2;
-    private RecyclerView recyclerView;
     ItemAdapter itemAdapter;
     FastAdapter fastAdapter;
-    public void setList(List list) {
+    private ProgressDialog pDialog;
+    private ListView lv;
+        private ArrayList<Contacts> contactList = new ArrayList<>();
+    private ArrayList<Contacts> contactList2;
+    private RecyclerView recyclerView;
+
+    public void setList(ArrayList list) {
         contactList2 = list;
     }
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements TaskCompleted {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        contactList2 = new ArrayList<Contacts>();
+        contactList2 = new ArrayList<>();
         new GetContacts(this).execute();
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -57,12 +57,17 @@ public class MainActivity extends AppCompatActivity implements TaskCompleted {
 
 
     @Override
-    public List onTaskComplete(List list) {
+    public ArrayList onTaskComplete(ArrayList list) {
         contactList2 = list;
+        itemAdapter.add(contactList2);
+        for(int i = 0 ; i < list.size() ; i++)
+        {
+            Toast.makeText(MainActivity.this, " " + contactList2.get(i).getName(),Toast.LENGTH_SHORT).show();
+        }
         return list;
     }
 
-    public List<Contacts> parseJson(String jsonStr) {
+    public ArrayList<Contacts> parseJson(String jsonStr) {
         if (jsonStr != null) {
             try {
                 JSONObject jsonObject = new JSONObject(jsonStr);
@@ -130,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements TaskCompleted {
         return contactList;
     }
 
-    private class GetContacts extends AsyncTask<Void, Void, List> {
+    private class GetContacts extends AsyncTask<Void, Void, ArrayList> {
         private Context mContext;
 
         private TaskCompleted mCallback;
@@ -142,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements TaskCompleted {
 
 
         @Override
-        protected void onPostExecute(final List list) {
+        protected void onPostExecute(ArrayList list) {
             super.onPostExecute(list);
             //Dismiss the progress dialog
 
@@ -152,24 +157,12 @@ public class MainActivity extends AppCompatActivity implements TaskCompleted {
             mCallback.onTaskComplete(list);
             new MainActivity().setList(list);
             Log.d(TAG, "CheckSize: " + contactList2.size());
-
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(getApplicationContext(),
-                            "" + list.size(),
-                            Toast.LENGTH_LONG).show();
-
-                }
-            });
-
-            itemAdapter.add(list);
             recyclerView.setAdapter(fastAdapter);
 
         }
 
         @Override
-        protected List doInBackground(Void... voids) {
+        protected ArrayList doInBackground(Void... voids) {
             HttpHandler sh = new HttpHandler();
 
             //Getting  JSON data
@@ -183,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements TaskCompleted {
             return contactList;
         }
 
-        List getContactList() {
+        ArrayList getContactList() {
             return contactList;
         }
 
