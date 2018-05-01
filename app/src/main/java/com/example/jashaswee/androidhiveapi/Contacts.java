@@ -1,6 +1,7 @@
 package com.example.jashaswee.androidhiveapi;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
@@ -51,7 +52,6 @@ public class Contacts extends AbstractItem<Contacts, Contacts.ViewHolder> implem
         this.mobile = mobile;
     }
 
-
     @NonNull
     @Override
     public ViewHolder getViewHolder(View v) {
@@ -91,11 +91,8 @@ public class Contacts extends AbstractItem<Contacts, Contacts.ViewHolder> implem
 
         @Override
         public void unbindView(Contacts item) {
-            name.setText(null);
-            email.setText(null);
-            mobile.setText(null);
-        }
 
+        }
 
     }
 

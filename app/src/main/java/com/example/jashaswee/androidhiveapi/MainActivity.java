@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.adapters.ItemAdapter;
+import com.mikepenz.fastadapter.commons.adapters.FastItemAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements TaskCompleted {
         private ArrayList<Contacts> contactList = new ArrayList<>();
     private ArrayList<Contacts> contactList2;
     private RecyclerView recyclerView;
+    FastItemAdapter<Contacts> fastItemAdapter;
 
     public void setList(ArrayList list) {
         contactList2 = list;
