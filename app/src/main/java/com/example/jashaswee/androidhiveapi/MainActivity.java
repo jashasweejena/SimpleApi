@@ -150,7 +150,6 @@ public class MainActivity extends AppCompatActivity implements TaskCompleted {
                 pDialog.dismiss();
 
             mCallback.onTaskComplete(list);
-
             new MainActivity().setList(list);
             Log.d(TAG, "CheckSize: " + contactList2.size());
 
@@ -166,7 +165,6 @@ public class MainActivity extends AppCompatActivity implements TaskCompleted {
 
             itemAdapter.add(list);
             recyclerView.setAdapter(fastAdapter);
-
 
         }
 
